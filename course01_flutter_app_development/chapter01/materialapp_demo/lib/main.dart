@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '简约风格登录页面',
+      title: '卡片式登录页面',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -70,73 +70,92 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,  // 透明背景
-        elevation: 0,  // 去掉阴影
         title: Text(
           '登录',
           style: TextStyle(
-            color: Colors.black,
+            color: Colors.white,
             fontSize: 28,
             fontWeight: FontWeight.bold,
           ),
         ),
+        backgroundColor: Colors.blue,
+        elevation: 4,  // 添加阴影效果
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                // 用户名输入框
-                TextFormField(
-                  controller: _usernameController,
-                  decoration: InputDecoration(
-                    labelText: '用户名',
-                    labelStyle: TextStyle(color: Colors.blue),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                    ),
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: _validateUsername,  // 用户名验证
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.blueAccent, Colors.lightBlue],  // 渐变色背景
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32.0),
+            child: SingleChildScrollView(
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),  // 圆角卡片
                 ),
-                SizedBox(height: 16),  // 间距
+                elevation: 8,  // 卡片阴影
+                child: Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        // 用户名输入框
+                        TextFormField(
+                          controller: _usernameController,
+                          decoration: InputDecoration(
+                            labelText: '用户名',
+                            labelStyle: TextStyle(color: Colors.blue),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.blue),
+                            ),
+                            border: OutlineInputBorder(),
+                          ),
+                          validator: _validateUsername,  // 用户名验证
+                        ),
+                        SizedBox(height: 16),  // 间距
 
-                // 密码输入框
-                TextFormField(
-                  controller: _passwordController,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    labelText: '密码',
-                    labelStyle: TextStyle(color: Colors.blue),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                    ),
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: _validatePassword,  // 密码验证
-                ),
-                SizedBox(height: 32),  // 间距
+                        // 密码输入框
+                        TextFormField(
+                          controller: _passwordController,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            labelText: '密码',
+                            labelStyle: TextStyle(color: Colors.blue),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.blue),
+                            ),
+                            border: OutlineInputBorder(),
+                          ),
+                          validator: _validatePassword,  // 密码验证
+                        ),
+                        SizedBox(height: 32),  // 间距
 
-                // 登录按钮
-                ElevatedButton(
-                  onPressed: _submitForm,  // 提交表单
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.blue,
-                    padding: EdgeInsets.symmetric(horizontal: 80, vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
+                        // 登录按钮
+                        ElevatedButton(
+                          onPressed: _submitForm,  // 提交表单
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue,  // 按钮背景色
+                            padding: EdgeInsets.symmetric(horizontal: 80, vertical: 16),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                          ),
+                          child: Text(
+                            '登录',
+                            style: TextStyle(fontSize: 18, color: Colors.white),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  child: Text(
-                    '登录',
-                    style: TextStyle(fontSize: 18),
-                  ),
                 ),
-              ],
+              ),
             ),
           ),
         ),
