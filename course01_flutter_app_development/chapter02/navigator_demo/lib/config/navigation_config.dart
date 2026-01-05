@@ -1,51 +1,48 @@
 import 'package:flutter/material.dart';
 import '../models/nav_item.dart';
+import '../screens/recommend_screen.dart';
+import '../screens/category_screen.dart';
+import '../screens/download_screen.dart';
+import '../screens/profile_screen.dart';
+import '../config/color_config.dart';
 
-/// 导航栏配置类 - 集中管理所有导航项配置
+/// 导航栏配置类 - 集中管理所有导航项配置和对应的页面
 ///
-/// 使用方式：
-/// ```dart
-/// final config = NavigationConfig();
-/// final navItems = config.navItems;
-/// ```
-///
-/// 修改导航项：只需修改 navItems 列表中的配置即可
+/// 艺术创意风格 - 壁纸APP导航配置
+/// 每个导航项都包含页面构建器，修改时只需在此文件中修改
 class NavigationConfig {
-  /// 定义所有导航项
+  /// 定义所有导航项 + 页面构建器
   static final List<NavItem> navItems = [
     NavItem(
-      id: 'home',
-      label: '首页',
+      id: 'recommend',
+      label: '推荐',
       icon: Icons.home_outlined,
-      color: const Color(0xFF2196F3), // 蓝色
-      description: '应用首页',
+      color: ColorConfig.recommendColor, // 热情红
+      pageBuilder: () => const RecommendScreen(),
+      description: '精选推荐',
     ),
     NavItem(
-      id: 'search',
-      label: '搜索',
-      icon: Icons.search_outlined,
-      color: const Color(0xFF4CAF50), // 绿色
-      description: '搜索功能',
+      id: 'category',
+      label: '分类',
+      icon: Icons.category_outlined,
+      color: ColorConfig.categoryColor, // 青绿色
+      pageBuilder: () => const CategoryScreen(),
+      description: '分类浏览',
     ),
     NavItem(
-      id: 'messages',
-      label: '消息',
-      icon: Icons.chat_bubble_outline,
-      color: const Color(0xFFFF9800), // 橙色
-      description: '消息中心',
-    ),
-    NavItem(
-      id: 'settings',
-      label: '设置',
-      icon: Icons.settings_outlined,
-      color: const Color(0xFF9C27B0), // 紫色
-      description: '应用设置',
+      id: 'download',
+      label: '下载',
+      icon: Icons.download_outlined,
+      color: ColorConfig.downloadColor, // 金黄色
+      pageBuilder: () => const DownloadScreen(),
+      description: '下载管理',
     ),
     NavItem(
       id: 'profile',
       label: '我的',
       icon: Icons.person_outline,
-      color: const Color(0xFFF44336), // 红色
+      color: ColorConfig.profileColor, // 浅紫色
+      pageBuilder: () => const ProfileScreen(),
       description: '个人中心',
     ),
   ];

@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'config/navigation_config.dart';
-import 'screens/home_screen.dart';
-import 'screens/search_screen.dart';
-import 'screens/messages_screen.dart';
-import 'screens/settings_screen.dart';
-import 'screens/profile_screen.dart';
+import 'themes/app_theme.dart';
 import 'widgets/custom_nav_bar.dart';
 
 void main() {
@@ -17,11 +13,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '导航栏示例',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      title: '壁纸APP',
+      theme: AppTheme.theme,
       home: const MyHomePage(),
       debugShowCheckedModeBanner: false,
     );
@@ -39,20 +32,17 @@ class _MyHomePageState extends State<MyHomePage> {
   /// 当前选中的导航项索引
   int _selectedIndex = 0;
 
-  /// 屏幕列表 - 对应导航配置中的各项
-  late final List<Widget> _screens = [
-    const HomeScreen(),
-    const SearchScreen(),
-    const MessagesScreen(),
-    const SettingsScreen(),
-    const ProfileScreen(),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    /// 从导航配置中自动生成屏幕列表
+    /// 这样修改导航项时，只需在 navigation_config.dart 中修改配置
+    final screens = NavigationConfig.navItems
+        .map((item) => item.pageBuilder())
+        .toList();
+
     return Scaffold(
       /// 使用 IndexedStack 保持所有屏幕状态
-      body: IndexedStack(index: _selectedIndex, children: _screens),
+      body: IndexedStack(index: _selectedIndex, children: screens),
 
       /// 自定义底部导航栏
       bottomNavigationBar: CustomNavBar(
