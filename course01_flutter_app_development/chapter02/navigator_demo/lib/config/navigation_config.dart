@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/nav_item.dart';
-import '../screens/recommend_screen.dart';
+import '../screens/home_screen.dart';
 import '../screens/category_screen.dart';
 import '../screens/download_screen.dart';
 import '../screens/profile_screen.dart';
@@ -15,10 +15,10 @@ class NavigationConfig {
   static final List<NavItem> navItems = [
     NavItem(
       id: 'recommend',
-      label: '推荐',
+      label: '首页',
       icon: Icons.home_outlined,
       color: ColorConfig.recommendColor, // 热情红
-      pageBuilder: () => const RecommendScreen(),
+      pageBuilder: () => const HomeScreen(),
       description: '精选推荐',
     ),
     NavItem(

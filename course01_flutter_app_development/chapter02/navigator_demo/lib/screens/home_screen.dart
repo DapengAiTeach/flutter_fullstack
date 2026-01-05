@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import '../config/color_config.dart';
 
-/// 首页屏幕
+/// 推荐页面 - 主题色：热情红 #FF6B6B
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -8,51 +9,173 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('首页'),
-        elevation: 0,
-        backgroundColor: const Color(0xFF2196F3),
+        title: const Text('推荐'),
+        backgroundColor: ColorConfig.backgroundColor,
+        elevation: 1,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                ColorConfig.recommendColor.withOpacity(0.1),
+                ColorConfig.backgroundColor,
+              ],
+            ),
+          ),
+        ),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(Icons.home, size: 80, color: Colors.blue[300]),
-            const SizedBox(height: 20),
-            const Text(
-              '欢迎来到首页',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
-            ),
-            const SizedBox(height: 10),
-            const Text(
-              '这是一个可配置的底部导航栏示例',
-              style: TextStyle(fontSize: 14, color: Colors.grey),
-            ),
-            const SizedBox(height: 30),
-            Container(
+            // 搜索框
+            Padding(
               padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.blue[50],
-                borderRadius: BorderRadius.circular(12),
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: '搜索壁纸...',
+                  prefixIcon: const Icon(Icons.search),
+                  prefixIconColor: ColorConfig.recommendColor,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(
+                      color: ColorConfig.dividerColor,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(
+                      color: ColorConfig.dividerColor,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(
+                      color: ColorConfig.recommendColor,
+                      width: 2,
+                    ),
+                  ),
+                ),
               ),
-              child: const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '💡 使用提示',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            // 精选推荐标题
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
+              child: Text(
+                '✨ 精选推荐',
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  color: ColorConfig.recommendColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            // 推荐壁纸网格
+            GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.75,
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 12,
+              ),
+              itemCount: 8,
+              itemBuilder: (context, index) {
+                return _buildWallpaperCard(context, '精选壁纸 ${index + 1}', index);
+              },
+            ),
+            const SizedBox(height: 20),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildWallpaperCard(BuildContext context, String title, int index) {
+    final colors = [
+      const Color(0xFFFF6B6B),
+      const Color(0xFFFF8E72),
+      const Color(0xFFFFA94D),
+      const Color(0xFFFFBD39),
+    ];
+
+    return GestureDetector(
+      onTap: () {},
+      child: Card(
+        elevation: 2,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        child: Stack(
+          children: [
+            // 壁纸预览
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                gradient: LinearGradient(
+                  colors: [
+                    colors[index % colors.length],
+                    colors[(index + 1) % colors.length],
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+              ),
+            ),
+            // 标题和下载按钮
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(12),
+                    bottomRight: Radius.circular(12),
                   ),
-                  SizedBox(height: 8),
-                  Text(
-                    '1. 点击底部导航栏切换页面\n'
-                    '2. 修改 navigation_config.dart 更改配置\n'
-                    '3. 支持自定义颜色、图标和标签',
-                    style: TextStyle(fontSize: 12, height: 1.6),
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.black.withOpacity(0),
+                      Colors.black.withOpacity(0.6),
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
                   ),
-                ],
+                ),
+                padding: const EdgeInsets.all(12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 4),
+                    SizedBox(
+                      height: 28,
+                      child: FilledButton(
+                        onPressed: () {},
+                        style: FilledButton.styleFrom(
+                          backgroundColor: ColorConfig.recommendColor,
+                          padding: EdgeInsets.zero,
+                        ),
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.download, size: 16),
+                            SizedBox(width: 4),
+                            Text('下载', style: TextStyle(fontSize: 12)),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
