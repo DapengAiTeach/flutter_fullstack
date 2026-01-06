@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../config/color_config.dart';
+import '../widgets/custom_search_app_bar.dart';
 
 /// 推荐页面 - 主题色：热情红 #FF6B6B
 class HomeScreen extends StatelessWidget {
@@ -8,55 +9,14 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('推荐'),
-        backgroundColor: ColorConfig.backgroundColor,
-        elevation: 1,
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                ColorConfig.recommendColor.withOpacity(0.1),
-                ColorConfig.backgroundColor,
-              ],
-            ),
-          ),
-        ),
+      appBar: CustomSearchAppBar(
+        hintText: '搜索壁纸...',
+        prefixIconColor: ColorConfig.recommendColor,
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 搜索框
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: '搜索壁纸...',
-                  prefixIcon: const Icon(Icons.search),
-                  prefixIconColor: ColorConfig.recommendColor,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(
-                      color: ColorConfig.dividerColor,
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(
-                      color: ColorConfig.dividerColor,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(
-                      color: ColorConfig.recommendColor,
-                      width: 2,
-                    ),
-                  ),
-                ),
-              ),
-            ),
             // 精选推荐标题
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),

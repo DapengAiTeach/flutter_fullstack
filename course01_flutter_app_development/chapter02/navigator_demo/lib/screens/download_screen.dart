@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../config/color_config.dart';
+import '../widgets/custom_search_app_bar.dart';
 
 /// 下载管理页面 - 主题色：金黄色 #FFE66D
 class DownloadScreen extends StatefulWidget {
@@ -21,44 +22,9 @@ class _DownloadScreenState extends State<DownloadScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('下载管理'),
-        backgroundColor: ColorConfig.backgroundColor,
-        elevation: 1,
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                ColorConfig.downloadColor.withOpacity(0.1),
-                ColorConfig.backgroundColor,
-              ],
-            ),
-          ),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 6,
-                ),
-                decoration: BoxDecoration(
-                  color: ColorConfig.downloadColor.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Text(
-                  '${downloads.length} 项',
-                  style: const TextStyle(
-                    color: ColorConfig.downloadColor,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
+      appBar: CustomSearchAppBar(
+        hintText: '搜索下载...',
+        prefixIconColor: ColorConfig.downloadColor,
       ),
       body: downloads.isEmpty
           ? _buildEmptyState(context)

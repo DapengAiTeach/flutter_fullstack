@@ -3,12 +3,12 @@ import '../config/color_config.dart';
 
 /// 应用主题配置 - 艺术创意风格
 class AppTheme {
-  /// 获取应用的主题数据
-  static ThemeData get theme {
+  /// 获取亮色主题数据
+  static ThemeData get lightTheme {
     return ThemeData(
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
-        seedColor: ColorConfig.primaryGradientStart,
+        seedColor: ColorConfig.lightPrimaryGradientStart,
         brightness: Brightness.light,
       ),
 
@@ -144,6 +144,152 @@ class AppTheme {
         backgroundColor: ColorConfig.cardBackground,
         selectedColor: ColorConfig.primaryButton,
         labelStyle: const TextStyle(color: ColorConfig.textColor),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      ),
+    );
+  }
+
+  /// 获取暗色主题数据
+  static ThemeData get darkTheme {
+    return ThemeData(
+      useMaterial3: true,
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: ColorConfig.darkPrimaryGradientStart,
+        brightness: Brightness.dark,
+      ),
+
+      // 应用栏主题
+      appBarTheme: AppBarTheme(
+        elevation: 0,
+        centerTitle: true,
+        backgroundColor: ColorConfig.darkBackgroundColor,
+        foregroundColor: ColorConfig.darkTextColor,
+        titleTextStyle: const TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color: ColorConfig.darkTextColor,
+        ),
+      ),
+
+      // 脚手架背景色
+      scaffoldBackgroundColor: ColorConfig.darkBackgroundColor,
+
+      // 文字主题
+      textTheme: const TextTheme(
+        headlineLarge: TextStyle(
+          fontSize: 28,
+          fontWeight: FontWeight.bold,
+          color: ColorConfig.darkTextColor,
+        ),
+        headlineMedium: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: ColorConfig.darkTextColor,
+        ),
+        headlineSmall: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          color: ColorConfig.darkTextColor,
+        ),
+        titleLarge: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w600,
+          color: ColorConfig.darkTextColor,
+        ),
+        titleMedium: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+          color: ColorConfig.darkTextColor,
+        ),
+        bodyLarge: TextStyle(
+          fontSize: 16,
+          color: ColorConfig.darkTextColor,
+          height: 1.5,
+        ),
+        bodyMedium: TextStyle(
+          fontSize: 14,
+          color: ColorConfig.darkTextColor,
+          height: 1.5,
+        ),
+        bodySmall: TextStyle(
+          fontSize: 12,
+          color: ColorConfig.darkSecondaryText,
+          height: 1.4,
+        ),
+        labelLarge: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w600,
+          color: ColorConfig.darkTextColor,
+        ),
+      ),
+
+      // 按钮主题
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          backgroundColor: ColorConfig.darkPrimaryButton,
+          foregroundColor: Colors.white,
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        ),
+      ),
+
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: ColorConfig.darkPrimaryButton,
+          side: const BorderSide(color: ColorConfig.darkPrimaryButton),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        ),
+      ),
+
+      // 卡片主题
+      cardTheme: CardThemeData(
+        color: ColorConfig.darkCardBackground,
+        elevation: 0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      ),
+
+      // 输入框主题
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: ColorConfig.darkCardBackground,
+        hintStyle: const TextStyle(color: ColorConfig.darkHintText),
+        labelStyle: const TextStyle(color: ColorConfig.darkTextColor),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: ColorConfig.darkDividerColor),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: ColorConfig.darkDividerColor),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(
+            color: ColorConfig.darkPrimaryButton,
+            width: 2,
+          ),
+        ),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 12,
+        ),
+      ),
+
+      // 分割线主题
+      dividerTheme: const DividerThemeData(
+        color: ColorConfig.darkDividerColor,
+        thickness: 1,
+        space: 0,
+      ),
+
+      // 芯片主题
+      chipTheme: ChipThemeData(
+        backgroundColor: ColorConfig.darkCardBackground,
+        selectedColor: ColorConfig.darkPrimaryButton,
+        labelStyle: const TextStyle(color: ColorConfig.darkTextColor),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
     );

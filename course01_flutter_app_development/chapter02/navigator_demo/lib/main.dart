@@ -1,22 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'config/navigation_config.dart';
+import 'providers/theme_provider.dart';
 import 'themes/app_theme.dart';
 import 'widgets/custom_nav_bar.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final themeProvider = ThemeProvider();
+  await themeProvider.initTheme();
+
+  runApp(MyApp(themeProvider: themeProvider));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final ThemeProvider themeProvider;
+
+  const MyApp({super.key, required this.themeProvider});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '壁纸APP',
-      theme: AppTheme.theme,
-      home: const MyHomePage(),
-      debugShowCheckedModeBanner: false,
+    return ChangeNotifierProvider<ThemeProvider>.value(
+      value: themeProvider,
+      child: Consumer<ThemeProvider>(
+        builder: (context, themeProvider, child) {
+          return MaterialApp(
+            title: '壁纸APP',
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: themeProvider.themeMode,
+            home: const MyHomePage(),
+            debugShowCheckedModeBanner: false,
+          );
+        },
+      ),
     );
   }
 }

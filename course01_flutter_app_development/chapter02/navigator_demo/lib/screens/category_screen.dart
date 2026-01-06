@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../config/color_config.dart';
+import '../widgets/custom_search_app_bar.dart';
 
 /// 分类页面 - 主题色：青绿色 #4ECDC4
 class CategoryScreen extends StatelessWidget {
@@ -20,20 +21,9 @@ class CategoryScreen extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('分类'),
-        backgroundColor: ColorConfig.backgroundColor,
-        elevation: 1,
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                ColorConfig.categoryColor.withOpacity(0.1),
-                ColorConfig.backgroundColor,
-              ],
-            ),
-          ),
-        ),
+      appBar: CustomSearchAppBar(
+        hintText: '搜索分类...',
+        prefixIconColor: ColorConfig.categoryColor,
       ),
       body: SingleChildScrollView(
         child: Column(
