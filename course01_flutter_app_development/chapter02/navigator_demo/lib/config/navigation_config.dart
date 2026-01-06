@@ -4,7 +4,6 @@ import '../screens/home_screen.dart';
 import '../screens/category_screen.dart';
 import '../screens/download_screen.dart';
 import '../screens/profile_screen.dart';
-import '../config/color_config.dart';
 
 /// 导航栏配置类 - 集中管理所有导航项配置和对应的页面
 ///
@@ -12,12 +11,14 @@ import '../config/color_config.dart';
 /// 每个导航项都包含页面构建器，修改时只需在此文件中修改
 class NavigationConfig {
   /// 定义所有导航项 + 页面构建器
+  static const Color _accentColor = Color(0xFF6366F1); // 青紫强调色
+
   static final List<NavItem> navItems = [
     NavItem(
       id: 'recommend',
       label: '首页',
       icon: Icons.home_outlined,
-      color: ColorConfig.recommendColor, // 热情红
+      color: _accentColor,
       pageBuilder: () => const HomeScreen(),
       description: '精选推荐',
     ),
@@ -25,7 +26,7 @@ class NavigationConfig {
       id: 'category',
       label: '分类',
       icon: Icons.category_outlined,
-      color: ColorConfig.categoryColor, // 青绿色
+      color: _accentColor,
       pageBuilder: () => const CategoryScreen(),
       description: '分类浏览',
     ),
@@ -33,7 +34,7 @@ class NavigationConfig {
       id: 'download',
       label: '下载',
       icon: Icons.download_outlined,
-      color: ColorConfig.downloadColor, // 金黄色
+      color: _accentColor,
       pageBuilder: () => const DownloadScreen(),
       description: '下载管理',
     ),
@@ -41,7 +42,7 @@ class NavigationConfig {
       id: 'profile',
       label: '我的',
       icon: Icons.person_outline,
-      color: ColorConfig.profileColor, // 浅紫色
+      color: _accentColor,
       pageBuilder: () => const ProfileScreen(),
       description: '个人中心',
     ),

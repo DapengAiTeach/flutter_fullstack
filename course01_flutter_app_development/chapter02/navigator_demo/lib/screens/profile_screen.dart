@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
-import '../config/color_config.dart';
+import '../themes/app_colors_extension.dart';
 import '../widgets/custom_search_app_bar.dart';
 
-/// 我的页面 - 主题色：浅紫色 #A78BFA
+/// 我的页面
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final accentColor =
+        Theme.of(context).extension<AppColorsExtension>()?.pageProfileColor ??
+        Color(0xFF6366F1);
+
     return Scaffold(
       appBar: CustomSearchAppBar(
         title: '我的',
         hintText: '搜索...',
-        prefixIconColor: ColorConfig.profileColor,
+        prefixIconColor: accentColor,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -25,15 +29,15 @@ class ProfileScreen extends StatelessWidget {
                 color: Theme.of(context).colorScheme.surface,
                 gradient: LinearGradient(
                   colors: [
-                    ColorConfig.profileColor.withOpacity(0.1),
-                    ColorConfig.profileColor.withOpacity(0.05),
+                    accentColor.withOpacity(0.1),
+                    accentColor.withOpacity(0.05),
                   ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
-                  color: ColorConfig.profileColor.withOpacity(0.2),
+                  color: accentColor.withOpacity(0.2),
                   width: 1,
                 ),
               ),
@@ -44,14 +48,10 @@ class ProfileScreen extends StatelessWidget {
                     width: 80,
                     height: 80,
                     decoration: BoxDecoration(
-                      color: ColorConfig.profileColor.withOpacity(0.2),
+                      color: accentColor.withOpacity(0.2),
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(
-                      Icons.person,
-                      size: 40,
-                      color: ColorConfig.profileColor,
-                    ),
+                    child: Icon(Icons.person, size: 40, color: accentColor),
                   ),
                   const SizedBox(width: 16),
                   // 用户信息
@@ -64,14 +64,13 @@ class ProfileScreen extends StatelessWidget {
                           style: Theme.of(context).textTheme.titleLarge
                               ?.copyWith(
                                 fontWeight: FontWeight.bold,
-                                color: ColorConfig.textColor,
+                                color: Theme.of(context).colorScheme.onSurface,
                               ),
                         ),
                         const SizedBox(height: 4),
                         Text(
                           'user@example.com',
-                          style: Theme.of(context).textTheme.bodySmall
-                              ?.copyWith(color: ColorConfig.secondaryText),
+                          style: Theme.of(context).textTheme.bodySmall,
                         ),
                         const SizedBox(height: 8),
                         Container(
@@ -80,7 +79,7 @@ class ProfileScreen extends StatelessWidget {
                             vertical: 4,
                           ),
                           decoration: BoxDecoration(
-                            color: ColorConfig.profileColor,
+                            color: accentColor,
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: const Text(
@@ -104,9 +103,9 @@ class ProfileScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _buildStatItem(context, '收藏', '128'),
-                  _buildStatItem(context, '下载', '256'),
-                  _buildStatItem(context, '浏览', '1.2k'),
+                  _buildStatItem(context, '收藏', '128', accentColor),
+                  _buildStatItem(context, '下载', '256', accentColor),
+                  _buildStatItem(context, '浏览', '1.2k', accentColor),
                 ],
               ),
             ),
@@ -114,41 +113,17 @@ class ProfileScreen extends StatelessWidget {
             const Divider(),
             // 功能菜单
             _buildMenuSection(context, '功能', [
-              {
-                'icon': Icons.favorite_outline,
-                'label': '我的收藏',
-                'color': ColorConfig.profileColor,
-              },
-              {
-                'icon': Icons.history,
-                'label': '浏览历史',
-                'color': ColorConfig.profileColor,
-              },
-              {
-                'icon': Icons.cloud_download_outlined,
-                'label': '下载管理',
-                'color': ColorConfig.profileColor,
-              },
-            ]),
+              {'icon': Icons.favorite_outline, 'label': '我的收藏'},
+              {'icon': Icons.history, 'label': '浏览历史'},
+              {'icon': Icons.cloud_download_outlined, 'label': '下载管理'},
+            ], accentColor),
             const Divider(),
             // 设置菜单
             _buildMenuSection(context, '设置', [
-              {
-                'icon': Icons.edit,
-                'label': '编辑资料',
-                'color': ColorConfig.profileColor,
-              },
-              {
-                'icon': Icons.lock_outline,
-                'label': '隐私设置',
-                'color': ColorConfig.profileColor,
-              },
-              {
-                'icon': Icons.help_outline,
-                'label': '帮助与反馈',
-                'color': ColorConfig.profileColor,
-              },
-            ]),
+              {'icon': Icons.edit, 'label': '编辑资料'},
+              {'icon': Icons.lock_outline, 'label': '隐私设置'},
+              {'icon': Icons.help_outline, 'label': '帮助与反馈'},
+            ], accentColor),
             const Divider(),
             // 登出按钮
             Padding(
@@ -158,7 +133,7 @@ class ProfileScreen extends StatelessWidget {
                 child: FilledButton(
                   onPressed: () {},
                   style: FilledButton.styleFrom(
-                    backgroundColor: ColorConfig.profileColor,
+                    backgroundColor: accentColor,
                     padding: const EdgeInsets.symmetric(vertical: 12),
                   ),
                   child: const Text(
@@ -175,13 +150,18 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildStatItem(BuildContext context, String label, String value) {
+  Widget _buildStatItem(
+    BuildContext context,
+    String label,
+    String value,
+    Color accentColor,
+  ) {
     return Column(
       children: [
         Text(
           value,
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            color: ColorConfig.profileColor,
+            color: accentColor,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -195,6 +175,7 @@ class ProfileScreen extends StatelessWidget {
     BuildContext context,
     String sectionTitle,
     List<Map<String, dynamic>> items,
+    Color accentColor,
   ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -203,10 +184,9 @@ class ProfileScreen extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
           child: Text(
             sectionTitle,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: ColorConfig.secondaryText,
-              fontWeight: FontWeight.bold,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
           ),
         ),
         ...items.map(
@@ -214,7 +194,7 @@ class ProfileScreen extends StatelessWidget {
             context,
             item['icon'] as IconData,
             item['label'] as String,
-            item['color'] as Color,
+            accentColor,
           ),
         ),
       ],

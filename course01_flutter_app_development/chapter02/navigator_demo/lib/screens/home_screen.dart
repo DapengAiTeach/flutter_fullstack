@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
-import '../config/color_config.dart';
+import '../themes/app_colors_extension.dart';
 import '../widgets/custom_search_app_bar.dart';
 
-/// 推荐页面 - 主题色：热情红 #FF6B6B
+/// 推荐页面
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final accentColor =
+        Theme.of(context).extension<AppColorsExtension>()?.pageRecommendColor ??
+        Color(0xFF6366F1);
+
     return Scaffold(
       appBar: CustomSearchAppBar(
         title: '推荐',
         hintText: '搜索壁纸...',
-        prefixIconColor: ColorConfig.recommendColor,
+        prefixIconColor: accentColor,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -24,7 +28,7 @@ class HomeScreen extends StatelessWidget {
               child: Text(
                 '✨ 精选推荐',
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: ColorConfig.recommendColor,
+                  color: accentColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -42,7 +46,12 @@ class HomeScreen extends StatelessWidget {
               ),
               itemCount: 8,
               itemBuilder: (context, index) {
-                return _buildWallpaperCard(context, '精选壁纸 ${index + 1}', index);
+                return _buildWallpaperCard(
+                  context,
+                  '精选壁纸 ${index + 1}',
+                  index,
+                  accentColor,
+                );
               },
             ),
             const SizedBox(height: 20),
@@ -52,7 +61,12 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildWallpaperCard(BuildContext context, String title, int index) {
+  Widget _buildWallpaperCard(
+    BuildContext context,
+    String title,
+    int index,
+    Color accentColor,
+  ) {
     final colors = [
       const Color(0xFFFF6B6B),
       const Color(0xFFFF8E72),
@@ -122,7 +136,7 @@ class HomeScreen extends StatelessWidget {
                       child: FilledButton(
                         onPressed: () {},
                         style: FilledButton.styleFrom(
-                          backgroundColor: ColorConfig.recommendColor,
+                          backgroundColor: accentColor,
                           padding: EdgeInsets.zero,
                         ),
                         child: const Row(

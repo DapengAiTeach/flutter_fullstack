@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
-import '../config/color_config.dart';
+import '../themes/app_colors_extension.dart';
 import '../widgets/custom_search_app_bar.dart';
 
-/// 分类页面 - 主题色：青绿色 #4ECDC4
+/// 分类页面
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final accentColor =
+        Theme.of(context).extension<AppColorsExtension>()?.pageCategoryColor ??
+        Color(0xFF6366F1);
+
     final categories = [
       {'name': '人物', 'icon': Icons.person, 'count': '2.3k'},
       {'name': '风景', 'icon': Icons.landscape, 'count': '5.1k'},
@@ -24,7 +28,7 @@ class CategoryScreen extends StatelessWidget {
       appBar: CustomSearchAppBar(
         title: '分类',
         hintText: '搜索分类...',
-        prefixIconColor: ColorConfig.categoryColor,
+        prefixIconColor: accentColor,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -36,7 +40,7 @@ class CategoryScreen extends StatelessWidget {
               child: Text(
                 '🎨 分类浏览',
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: ColorConfig.categoryColor,
+                  color: accentColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -60,6 +64,7 @@ class CategoryScreen extends StatelessWidget {
                   category['name'] as String,
                   category['icon'] as IconData,
                   category['count'] as String,
+                  accentColor,
                 );
               },
             ),
@@ -75,6 +80,7 @@ class CategoryScreen extends StatelessWidget {
     String name,
     IconData icon,
     String count,
+    Color accentColor,
   ) {
     return GestureDetector(
       onTap: () {},
@@ -82,10 +88,7 @@ class CategoryScreen extends StatelessWidget {
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: ColorConfig.categoryColor.withOpacity(0.2),
-            width: 1,
-          ),
+          border: Border.all(color: accentColor.withOpacity(0.2), width: 1),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -93,24 +96,24 @@ class CategoryScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: ColorConfig.categoryColor.withOpacity(0.1),
+                color: accentColor.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
-              child: Icon(icon, color: ColorConfig.categoryColor, size: 32),
+              child: Icon(icon, color: accentColor, size: 32),
             ),
             const SizedBox(height: 8),
             Text(
               name,
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.bold,
-                color: ColorConfig.textColor,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
             const SizedBox(height: 4),
             Text(
               count,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: ColorConfig.categoryColor,
+                color: accentColor,
                 fontWeight: FontWeight.w600,
               ),
             ),

@@ -1,101 +1,122 @@
 import 'package:flutter/material.dart';
-import '../config/color_config.dart';
 import 'app_colors_extension.dart';
 
-/// 应用主题配置 - 艺术创意风格
+/// 应用主题配置 - 深灰黑极简现代风格
 class AppTheme {
+  // ============ 颜色常量 ============
+  // 亮色主题
+  static const Color _lightPrimary = Color(0xFF000000); // 纯黑
+  static const Color _lightBg = Color(0xFFFFFFFF); // 纯白
+  static const Color _lightCardBg = Color(0xFFFAFAFA); // 极浅灰
+  static const Color _lightText = Color(0xFF18181B); // 近黑
+  static const Color _lightTextSecondary = Color(0xFF52525B); // 中灰
+  static const Color _lightBorder = Color(0xFFE4E4E7); // 浅灰
+  static const Color _lightAccent = Color(0xFF6366F1); // 青紫强调色
+
+  // 暗色主题
+  static const Color _darkPrimary = Color(0xFFFAFAFA); // 极浅灰
+  static const Color _darkBg = Color(0xFF09090B); // 极黑
+  static const Color _darkCardBg = Color(0xFF18181B); // 深灰
+  static const Color _darkText = Color(0xFFF4F4F5); // 浅白
+  static const Color _darkTextSecondary = Color(0xFFA1A1A6); // 灰
+  static const Color _darkBorder = Color(0xFF27272A); // 中深灰
+  static const Color _darkAccent = Color(0xFF6366F1); // 青紫强调色
+
+  // 功能颜色
+  static const Color _lightSuccess = Color(0xFF10B981); // 成功绿
+  static const Color _lightWarning = Color(0xFFF59E0B); // 警告橙
+  static const Color _lightError = Color(0xFFEF4444); // 错误红
+  static const Color _lightInfo = Color(0xFF0EA5E9); // 信息蓝
+
+  static const Color _darkSuccess = Color(0xFF6EE7B7); // 成功绿
+  static const Color _darkWarning = Color(0xFFFBBF24); // 警告橙
+  static const Color _darkError = Color(0xFFFCA5A5); // 错误红
+  static const Color _darkInfo = Color(0xFF38BDF8); // 信息蓝
+
   /// 获取亮色主题数据
   static ThemeData get lightTheme {
     return ThemeData(
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
-        seedColor: ColorConfig.lightPrimary,
+        seedColor: _lightAccent,
         brightness: Brightness.light,
       ),
 
       // 自定义颜色扩展
       extensions: <ThemeExtension<dynamic>>[
         AppColorsExtension(
-          pageRecommendColor: ColorConfig.lightPageHome,
-          pageCategoryColor: ColorConfig.lightPageCategory,
-          pageDownloadColor: ColorConfig.lightPageDownload,
-          pageProfileColor: ColorConfig.lightPageProfile,
-          successColor: ColorConfig.lightSuccess,
-          warningColor: ColorConfig.lightWarning,
-          errorColor: ColorConfig.lightError,
-          infoColor: ColorConfig.lightInfo,
+          pageRecommendColor: _lightAccent,
+          pageCategoryColor: _lightAccent,
+          pageDownloadColor: _lightAccent,
+          pageProfileColor: _lightAccent,
+          successColor: _lightSuccess,
+          warningColor: _lightWarning,
+          errorColor: _lightError,
+          infoColor: _lightInfo,
         ),
       ],
 
-      // 应用栏主题 - 紫蓝渐变
-      appBarTheme: AppBarTheme(
+      // 应用栏主题
+      appBarTheme: const AppBarTheme(
         elevation: 0,
         centerTitle: true,
-        backgroundColor: ColorConfig.lightBg,
-        foregroundColor: ColorConfig.lightText,
-        titleTextStyle: const TextStyle(
+        backgroundColor: _lightBg,
+        foregroundColor: _lightText,
+        titleTextStyle: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: ColorConfig.lightText,
+          color: _lightText,
         ),
       ),
 
       // 脚手架背景色
-      scaffoldBackgroundColor: ColorConfig.lightBg,
+      scaffoldBackgroundColor: _lightBg,
 
       // 文字主题
       textTheme: const TextTheme(
         headlineLarge: TextStyle(
           fontSize: 28,
           fontWeight: FontWeight.bold,
-          color: ColorConfig.textColor,
+          color: _lightText,
         ),
         headlineMedium: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: ColorConfig.textColor,
+          color: _lightText,
         ),
         headlineSmall: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
-          color: ColorConfig.textColor,
+          color: _lightText,
         ),
         titleLarge: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.w600,
-          color: ColorConfig.textColor,
+          color: _lightText,
         ),
         titleMedium: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w600,
-          color: ColorConfig.textColor,
+          color: _lightText,
         ),
-        bodyLarge: TextStyle(
-          fontSize: 16,
-          color: ColorConfig.textColor,
-          height: 1.5,
-        ),
-        bodyMedium: TextStyle(
-          fontSize: 14,
-          color: ColorConfig.textColor,
-          height: 1.5,
-        ),
+        bodyLarge: TextStyle(fontSize: 16, color: _lightText, height: 1.5),
+        bodyMedium: TextStyle(fontSize: 14, color: _lightText, height: 1.5),
         bodySmall: TextStyle(
           fontSize: 12,
-          color: ColorConfig.secondaryText,
+          color: _lightTextSecondary,
           height: 1.4,
         ),
         labelLarge: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w600,
-          color: ColorConfig.textColor,
+          color: _lightText,
         ),
       ),
 
       // 按钮主题
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
-          backgroundColor: ColorConfig.primaryButton,
+          backgroundColor: _lightAccent,
           foregroundColor: Colors.white,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -105,8 +126,8 @@ class AppTheme {
 
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          foregroundColor: ColorConfig.primaryButton,
-          side: const BorderSide(color: ColorConfig.primaryButton),
+          foregroundColor: _lightAccent,
+          side: const BorderSide(color: _lightAccent),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),
@@ -122,23 +143,20 @@ class AppTheme {
       // 输入框主题
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: ColorConfig.cardBackground,
-        hintStyle: const TextStyle(color: ColorConfig.hintText),
-        labelStyle: const TextStyle(color: ColorConfig.textColor),
+        fillColor: _lightCardBg,
+        hintStyle: const TextStyle(color: _lightTextSecondary),
+        labelStyle: const TextStyle(color: _lightText),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: ColorConfig.dividerColor),
+          borderSide: const BorderSide(color: _lightBorder),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: ColorConfig.dividerColor),
+          borderSide: const BorderSide(color: _lightBorder),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(
-            color: ColorConfig.primaryButton,
-            width: 2,
-          ),
+          borderSide: const BorderSide(color: _lightAccent, width: 2),
         ),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
@@ -148,16 +166,16 @@ class AppTheme {
 
       // 分割线主题
       dividerTheme: const DividerThemeData(
-        color: ColorConfig.dividerColor,
+        color: _lightBorder,
         thickness: 1,
         space: 0,
       ),
 
       // 芯片主题
       chipTheme: ChipThemeData(
-        backgroundColor: ColorConfig.cardBackground,
-        selectedColor: ColorConfig.primaryButton,
-        labelStyle: const TextStyle(color: ColorConfig.textColor),
+        backgroundColor: _lightCardBg,
+        selectedColor: _lightAccent,
+        labelStyle: const TextStyle(color: _lightText),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
     );
@@ -168,93 +186,85 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
-        seedColor: ColorConfig.darkPrimary,
+        seedColor: _darkAccent,
         brightness: Brightness.dark,
       ),
 
       // 自定义颜色扩展
       extensions: <ThemeExtension<dynamic>>[
         AppColorsExtension(
-          pageRecommendColor: ColorConfig.darkPageHome,
-          pageCategoryColor: ColorConfig.darkPageCategory,
-          pageDownloadColor: ColorConfig.darkPageDownload,
-          pageProfileColor: ColorConfig.darkPageProfile,
-          successColor: ColorConfig.darkSuccess,
-          warningColor: ColorConfig.darkWarning,
-          errorColor: ColorConfig.darkError,
-          infoColor: ColorConfig.darkInfo,
+          pageRecommendColor: _darkAccent,
+          pageCategoryColor: _darkAccent,
+          pageDownloadColor: _darkAccent,
+          pageProfileColor: _darkAccent,
+          successColor: _darkSuccess,
+          warningColor: _darkWarning,
+          errorColor: _darkError,
+          infoColor: _darkInfo,
         ),
       ],
 
       // 应用栏主题
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
         elevation: 0,
         centerTitle: true,
-        backgroundColor: ColorConfig.darkBg,
-        foregroundColor: ColorConfig.darkText,
-        titleTextStyle: const TextStyle(
+        backgroundColor: _darkBg,
+        foregroundColor: _darkText,
+        titleTextStyle: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: ColorConfig.darkText,
+          color: _darkText,
         ),
       ),
 
       // 脚手架背景色
-      scaffoldBackgroundColor: ColorConfig.darkBg,
+      scaffoldBackgroundColor: _darkBg,
 
       // 文字主题
       textTheme: const TextTheme(
         headlineLarge: TextStyle(
           fontSize: 28,
           fontWeight: FontWeight.bold,
-          color: ColorConfig.darkText,
+          color: _darkText,
         ),
         headlineMedium: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: ColorConfig.darkText,
+          color: _darkText,
         ),
         headlineSmall: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
-          color: ColorConfig.darkText,
+          color: _darkText,
         ),
         titleLarge: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.w600,
-          color: ColorConfig.darkText,
+          color: _darkText,
         ),
         titleMedium: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w600,
-          color: ColorConfig.darkText,
+          color: _darkText,
         ),
-        bodyLarge: TextStyle(
-          fontSize: 16,
-          color: ColorConfig.darkText,
-          height: 1.5,
-        ),
-        bodyMedium: TextStyle(
-          fontSize: 14,
-          color: ColorConfig.darkText,
-          height: 1.5,
-        ),
+        bodyLarge: TextStyle(fontSize: 16, color: _darkText, height: 1.5),
+        bodyMedium: TextStyle(fontSize: 14, color: _darkText, height: 1.5),
         bodySmall: TextStyle(
           fontSize: 12,
-          color: ColorConfig.darkTextSecondary,
+          color: _darkTextSecondary,
           height: 1.4,
         ),
         labelLarge: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w600,
-          color: ColorConfig.darkText,
+          color: _darkText,
         ),
       ),
 
       // 按钮主题
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
-          backgroundColor: ColorConfig.darkPrimary,
+          backgroundColor: _darkAccent,
           foregroundColor: Colors.white,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
@@ -264,8 +274,8 @@ class AppTheme {
 
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          foregroundColor: ColorConfig.darkPrimary,
-          side: const BorderSide(color: ColorConfig.darkPrimary),
+          foregroundColor: _darkAccent,
+          side: const BorderSide(color: _darkAccent),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),
@@ -281,23 +291,20 @@ class AppTheme {
       // 输入框主题
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: ColorConfig.darkCardBg,
-        hintStyle: const TextStyle(color: ColorConfig.darkHint),
-        labelStyle: const TextStyle(color: ColorConfig.darkText),
+        fillColor: _darkCardBg,
+        hintStyle: const TextStyle(color: _darkTextSecondary),
+        labelStyle: const TextStyle(color: _darkText),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: ColorConfig.darkBorder),
+          borderSide: const BorderSide(color: _darkBorder),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: ColorConfig.darkBorder),
+          borderSide: const BorderSide(color: _darkBorder),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(
-            color: ColorConfig.darkPrimary,
-            width: 2,
-          ),
+          borderSide: const BorderSide(color: _darkAccent, width: 2),
         ),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
@@ -307,16 +314,16 @@ class AppTheme {
 
       // 分割线主题
       dividerTheme: const DividerThemeData(
-        color: ColorConfig.darkBorder,
+        color: _darkBorder,
         thickness: 1,
         space: 0,
       ),
 
       // 芯片主题
       chipTheme: ChipThemeData(
-        backgroundColor: ColorConfig.darkCardBg,
-        selectedColor: ColorConfig.darkPrimary,
-        labelStyle: const TextStyle(color: ColorConfig.darkText),
+        backgroundColor: _darkCardBg,
+        selectedColor: _darkAccent,
+        labelStyle: const TextStyle(color: _darkText),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
     );

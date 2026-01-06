@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../config/color_config.dart';
+import '../themes/app_colors_extension.dart';
 import '../widgets/custom_search_app_bar.dart';
 
-/// 下载管理页面 - 主题色：金黄色 #FFE66D
+/// 下载管理页面
 class DownloadScreen extends StatefulWidget {
   const DownloadScreen({Key? key}) : super(key: key);
 
@@ -21,25 +21,38 @@ class _DownloadScreenState extends State<DownloadScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final accentColor =
+        Theme.of(context).extension<AppColorsExtension>()?.pageDownloadColor ??
+        Color(0xFF6366F1);
+    final errorColor =
+        Theme.of(context).extension<AppColorsExtension>()?.errorColor ??
+        Color(0xFFEF4444);
+
     return Scaffold(
       appBar: CustomSearchAppBar(
         title: '下载',
         hintText: '搜索下载...',
-        prefixIconColor: ColorConfig.downloadColor,
+        prefixIconColor: accentColor,
       ),
       body: downloads.isEmpty
-          ? _buildEmptyState(context)
+          ? _buildEmptyState(context, accentColor)
           : ListView.builder(
               itemCount: downloads.length,
               itemBuilder: (context, index) {
                 final download = downloads[index];
-                return _buildDownloadItem(context, download, index);
+                return _buildDownloadItem(
+                  context,
+                  download,
+                  index,
+                  accentColor,
+                  errorColor,
+                );
               },
             ),
     );
   }
 
-  Widget _buildEmptyState(BuildContext context) {
+  Widget _buildEmptyState(BuildContext context, Color accentColor) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -47,15 +60,10 @@ class _DownloadScreenState extends State<DownloadScreen> {
           Icon(
             Icons.cloud_download_outlined,
             size: 80,
-            color: ColorConfig.downloadColor.withOpacity(0.3),
+            color: accentColor.withOpacity(0.3),
           ),
           const SizedBox(height: 16),
-          Text(
-            '还没有下载任何壁纸',
-            style: Theme.of(
-              context,
-            ).textTheme.titleMedium?.copyWith(color: ColorConfig.secondaryText),
-          ),
+          Text('还没有下载任何壁纸', style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: 8),
           Text('前往推荐或分类页面下载壁纸吧', style: Theme.of(context).textTheme.bodySmall),
         ],
@@ -67,6 +75,8 @@ class _DownloadScreenState extends State<DownloadScreen> {
     BuildContext context,
     Map<String, dynamic> download,
     int index,
+    Color accentColor,
+    Color errorColor,
   ) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -87,14 +97,10 @@ class _DownloadScreenState extends State<DownloadScreen> {
               width: 80,
               height: 80,
               decoration: BoxDecoration(
-                color: ColorConfig.downloadColor.withOpacity(0.1),
+                color: accentColor.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Icon(
-                Icons.image,
-                size: 40,
-                color: ColorConfig.downloadColor,
-              ),
+              child: Icon(Icons.image, size: 40, color: accentColor),
             ),
             const SizedBox(width: 12),
             // 信息部分
@@ -121,17 +127,15 @@ class _DownloadScreenState extends State<DownloadScreen> {
                       Container(
                         width: 4,
                         height: 4,
-                        decoration: const BoxDecoration(
-                          color: ColorConfig.dividerColor,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.outlineVariant,
                           shape: BoxShape.circle,
                         ),
                       ),
                       const SizedBox(width: 8),
                       Text(
                         download['date'],
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: ColorConfig.secondaryText,
-                        ),
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ],
                   ),
@@ -141,10 +145,10 @@ class _DownloadScreenState extends State<DownloadScreen> {
                     borderRadius: BorderRadius.circular(4),
                     child: LinearProgressIndicator(
                       value: download['progress'],
-                      backgroundColor: ColorConfig.dividerColor,
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        ColorConfig.downloadColor,
-                      ),
+                      backgroundColor: Theme.of(
+                        context,
+                      ).colorScheme.outlineVariant,
+                      valueColor: AlwaysStoppedAnimation<Color>(accentColor),
                       minHeight: 4,
                     ),
                   ),
@@ -159,7 +163,7 @@ class _DownloadScreenState extends State<DownloadScreen> {
                 IconButton(
                   onPressed: () {},
                   icon: const Icon(Icons.preview),
-                  color: ColorConfig.downloadColor,
+                  color: accentColor,
                   iconSize: 20,
                   padding: EdgeInsets.zero,
                   constraints: const BoxConstraints(),
@@ -172,7 +176,7 @@ class _DownloadScreenState extends State<DownloadScreen> {
                     });
                   },
                   icon: const Icon(Icons.delete_outline),
-                  color: ColorConfig.errorColor,
+                  color: errorColor,
                   iconSize: 20,
                   padding: EdgeInsets.zero,
                   constraints: const BoxConstraints(),
