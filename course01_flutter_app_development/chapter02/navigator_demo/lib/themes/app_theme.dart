@@ -97,9 +97,8 @@ class AppTheme {
         ),
       ),
 
-      // 卡片主题
+      // 卡片主题 - 使用 ColorScheme 的 surface 颜色
       cardTheme: CardThemeData(
-        color: ColorConfig.cardBackground,
         elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
@@ -243,9 +242,8 @@ class AppTheme {
         ),
       ),
 
-      // 卡片主题
+      // 卡片主题 - 使用 ColorScheme 的 surface 颜色
       cardTheme: CardThemeData(
-        color: ColorConfig.darkCardBg,
         elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),

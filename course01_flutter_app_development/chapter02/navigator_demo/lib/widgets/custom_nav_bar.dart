@@ -53,17 +53,21 @@ class CustomNavBar extends StatelessWidget {
     final style = styleConfig ?? NavigationConfig.styleConfig;
     final animation = animationConfig ?? NavigationConfig.animationConfig;
 
+    // 从主题 ColorScheme 获取背景色
+    final backgroundColor = Theme.of(context).colorScheme.surface;
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       height: style.height,
       decoration: BoxDecoration(
-        color: style.backgroundColor,
+        color: backgroundColor,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(style.borderRadius),
           topRight: Radius.circular(style.borderRadius),
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withOpacity(isDarkMode ? 0.3 : 0.1),
             blurRadius: style.elevation,
             offset: const Offset(0, -2),
           ),

@@ -80,7 +80,7 @@ class CategoryScreen extends StatelessWidget {
       onTap: () {},
       child: Container(
         decoration: BoxDecoration(
-          color: ColorConfig.cardBackground,
+          color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
             color: ColorConfig.categoryColor.withOpacity(0.2),

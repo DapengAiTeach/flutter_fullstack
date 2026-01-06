@@ -22,6 +22,7 @@ class ProfileScreen extends StatelessWidget {
               margin: const EdgeInsets.all(16),
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surface,
                 gradient: LinearGradient(
                   colors: [
                     ColorConfig.profileColor.withOpacity(0.1),
