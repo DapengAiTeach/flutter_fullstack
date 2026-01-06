@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../config/color_config.dart';
+import 'app_colors_extension.dart';
 
 /// 应用主题配置 - 艺术创意风格
 class AppTheme {
@@ -11,6 +12,20 @@ class AppTheme {
         seedColor: ColorConfig.lightPrimary,
         brightness: Brightness.light,
       ),
+
+      // 自定义颜色扩展
+      extensions: <ThemeExtension<dynamic>>[
+        AppColorsExtension(
+          pageRecommendColor: ColorConfig.lightPageHome,
+          pageCategoryColor: ColorConfig.lightPageCategory,
+          pageDownloadColor: ColorConfig.lightPageDownload,
+          pageProfileColor: ColorConfig.lightPageProfile,
+          successColor: ColorConfig.lightSuccess,
+          warningColor: ColorConfig.lightWarning,
+          errorColor: ColorConfig.lightError,
+          infoColor: ColorConfig.lightInfo,
+        ),
+      ],
 
       // 应用栏主题 - 紫蓝渐变
       appBarTheme: AppBarTheme(
@@ -156,6 +171,20 @@ class AppTheme {
         seedColor: ColorConfig.darkPrimary,
         brightness: Brightness.dark,
       ),
+
+      // 自定义颜色扩展
+      extensions: <ThemeExtension<dynamic>>[
+        AppColorsExtension(
+          pageRecommendColor: ColorConfig.darkPageHome,
+          pageCategoryColor: ColorConfig.darkPageCategory,
+          pageDownloadColor: ColorConfig.darkPageDownload,
+          pageProfileColor: ColorConfig.darkPageProfile,
+          successColor: ColorConfig.darkSuccess,
+          warningColor: ColorConfig.darkWarning,
+          errorColor: ColorConfig.darkError,
+          infoColor: ColorConfig.darkInfo,
+        ),
+      ],
 
       // 应用栏主题
       appBarTheme: AppBarTheme(
