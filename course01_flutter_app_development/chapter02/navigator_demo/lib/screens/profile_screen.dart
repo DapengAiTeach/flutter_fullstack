@@ -10,6 +10,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomSearchAppBar(
+        title: '我的',
         hintText: '搜索...',
         prefixIconColor: ColorConfig.profileColor,
       ),

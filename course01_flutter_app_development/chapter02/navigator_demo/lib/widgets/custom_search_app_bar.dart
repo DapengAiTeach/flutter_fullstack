@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/theme_provider.dart';
 
-/// 自定义搜索AppBar组件 - 包含搜索框和主题切换按钮
+/// 自定义搜索AppBar组件 - 包含标题、搜索框和主题切换按钮
 class CustomSearchAppBar extends StatelessWidget
     implements PreferredSizeWidget {
+  /// 页面标题（左侧，最多3个字）
+  final String title;
+
   /// 搜索框提示文字
   final String hintText;
 
@@ -19,6 +22,7 @@ class CustomSearchAppBar extends StatelessWidget
 
   const CustomSearchAppBar({
     Key? key,
+    required this.title,
     this.hintText = '搜索...',
     required this.prefixIconColor,
     this.onSearchChanged,
@@ -32,15 +36,32 @@ class CustomSearchAppBar extends StatelessWidget
   Widget build(BuildContext context) {
     return AppBar(
       titleSpacing: 0,
+      leading: _buildTitleWidget(context),
       title: _buildSearchField(context),
       actions: [_buildThemeSwitchButton(context), const SizedBox(width: 8)],
+    );
+  }
+
+  /// 构建左侧标题
+  Widget _buildTitleWidget(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.only(left: 16),
+        child: Text(
+          title,
+          style:
+              Theme.of(context).appBarTheme.titleTextStyle ??
+              const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          maxLines: 1,
+        ),
+      ),
     );
   }
 
   /// 构建搜索框
   Widget _buildSearchField(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       child: TextField(
         decoration: InputDecoration(
           hintText: hintText,

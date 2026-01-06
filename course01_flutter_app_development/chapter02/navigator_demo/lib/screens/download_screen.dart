@@ -23,6 +23,7 @@ class _DownloadScreenState extends State<DownloadScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomSearchAppBar(
+        title: '下载',
         hintText: '搜索下载...',
         prefixIconColor: ColorConfig.downloadColor,
       ),

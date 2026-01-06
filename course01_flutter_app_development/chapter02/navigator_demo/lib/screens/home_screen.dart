@@ -10,6 +10,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomSearchAppBar(
+        title: '推荐',
         hintText: '搜索壁纸...',
         prefixIconColor: ColorConfig.recommendColor,
       ),

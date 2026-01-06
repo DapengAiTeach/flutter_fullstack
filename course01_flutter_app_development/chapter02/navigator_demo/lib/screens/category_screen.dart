@@ -22,6 +22,7 @@ class CategoryScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: CustomSearchAppBar(
+        title: '分类',
         hintText: '搜索分类...',
         prefixIconColor: ColorConfig.categoryColor,
       ),
